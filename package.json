@@ -1,0 +1,26 @@
+{
+  "name": "apk_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "pre-commit": "node_modules/.bin/eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "appium": "^1.21.0",
+    "express": "^4.17.1",
+    "husky": "^6.0.0",
+    "webdriverio": "^7.6.0",
+    "websocket": "^1.0.34",
+    "ws": "^7.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0"
+  }
+}
