@@ -21,6 +21,7 @@ const androidOptions = {
 
 const sent = async function () {
     let client = await webdriverio.remote(androidOptions);
+    let msg = "hi there";
     try {
         await client.unlock();
         // Start new conversation
@@ -41,7 +42,7 @@ const sent = async function () {
         await client.$("//*[@resource-id='android:id/list']");
         // write the text message
         const message = await client.$("//*[@resource-id='com.whatsapp:id/entry']");
-        await message.addValue('Hi there');
+        await message.addValue(msg);
         let sentTime = new Date();
         // send the message
         const send = await client.$("//*[@resource-id='com.whatsapp:id/send']");
@@ -49,11 +50,12 @@ const sent = async function () {
         // test screenshot
         await screenshot(client);
         await client.closeApp();
-        return sentTime;
+        return { Time: sentTime, Msg: msg };
     } catch (error) {
         console.log(error)
         await client.closeApp();
         return error;
+
     }
 };
 

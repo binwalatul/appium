@@ -2,6 +2,7 @@ const express = require('express');
 const WebSocket = require('ws');
 const http = require('http');
 const { sent } = require('./sent');
+const { recieve } = require('./recieve');
 const app = express();
 //initialize a simple http server
 const server = http.createServer(app);
@@ -14,11 +15,17 @@ wss.on('connection', async (ws) => {
     ws.on('message', async (message) => {
 
         //log the received message and send it back to the client
-        // console.log('received: %s', typeof (message));
-        if (message === 'Start') {
+        if (message === 'Send') {
             ws.send(`Executing the command!! -> ${message}`);
+            // let res = Promise.all(sent, recieve);
+            // console.log(res)
             let time = await sent();
-            ws.send(`Message sent at -> ${time}`);
+            ws.send(`Message sent at -> ${JSON.stringify(time)}`);
+        }
+        if (message === 'Recieve') {
+            ws.send(`Executing the command!! -> ${message}`);
+            let time = await recieve();
+            ws.send(`Message recieved at -> ${JSON.stringify(time)}`);
         }
     });
 
